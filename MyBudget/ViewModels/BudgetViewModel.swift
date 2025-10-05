@@ -169,7 +169,7 @@ class BudgetViewModel: ObservableObject {
             try budgetService.cleanupDuplicateSectionCategoryMappings()
 
             // Load budgets for default user (used after reset)
-            budgetService.loadBudgets(for: "default-user")
+            budgetService.loadBudgets(for: "demo-user")
 
             // Load categories
             categoryService.loadCategories()
@@ -215,8 +215,8 @@ class BudgetViewModel: ObservableObject {
 
     /// Ensures a default budget exists for the user, creates one if none exists
     private func ensureDefaultBudgetExists() async {
-        // Prevent infinite loop by checking if we're already in the process of creating a budget
-        guard budgets.isEmpty && !isLoading else { return }
+        // Only create budget if we don't already have one
+        guard budgets.isEmpty else { return }
 
         do {
             let defaultBudget = try budgetService.createBudget(
@@ -710,7 +710,7 @@ class BudgetViewModel: ObservableObject {
             try await Task.sleep(nanoseconds: 200_000_000) // 0.2 seconds
 
             // Refresh budget data to ensure everything is loaded
-            budgetService.loadBudgets(for: "default-user")
+            budgetService.loadBudgets(for: "demo-user")
             await refreshCurrentBudgetData()
 
 
@@ -969,7 +969,7 @@ class BudgetViewModel: ObservableObject {
         try budgetService.updateBudget(currentBudget, name: name, icon: icon, color: color, currencyCode: currencyCode)
 
         // Reload budget data to reflect changes
-        budgetService.loadBudgets(for: "default-user")
+        budgetService.loadBudgets(for: "demo-user")
         await refreshCurrentBudgetData()
 
         await MainActor.run {

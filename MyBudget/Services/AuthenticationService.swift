@@ -787,17 +787,20 @@ class AuthenticationService: ObservableObject {
     }
     
     func syncDeviceTokenAfterLogin() async {
+        // TODO: Implement device token sync when NotificationService supports these methods
         // Check if we have a stored device token to sync
-        if let deviceToken = NotificationManager.shared.getStoredDeviceToken(),
-           NotificationManager.shared.shouldSyncDeviceToken() {
-            
+        /*
+        if let deviceToken = NotificationService.shared.getStoredDeviceToken(),
+           NotificationService.shared.shouldSyncDeviceToken() {
+
             let success = await updateDeviceToken(deviceToken)
-            
+
             if success {
-                NotificationManager.shared.markDeviceTokenSynced()
+                NotificationService.shared.markDeviceTokenSynced()
             } else {
             }
         }
+        */
     }
 }
 

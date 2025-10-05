@@ -5,7 +5,7 @@ class PersistenceController {
     static let shared = PersistenceController()
     
     lazy var container: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "LifeLaunch")
+        let container = NSPersistentContainer(name: "MyBudget")
         
         // Configure for better performance and migration
         if let storeDescription = container.persistentStoreDescriptions.first {

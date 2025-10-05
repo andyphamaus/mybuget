@@ -6,6 +6,7 @@ struct OnboardingStep: Identifiable, Equatable {
     let id = UUID()
     let title: String
     let description: String
+    let content: String? // Additional content (optional)
     let illustration: String // SF Symbol or emoji
     let actionText: String
     let interactionType: InteractionType
@@ -49,6 +50,7 @@ struct OnboardingStep: Identifiable, Equatable {
     init(
         title: String,
         description: String,
+        content: String? = nil,
         illustration: String = "sparkles",
         actionText: String = "Continue",
         interactionType: InteractionType = .tap,
@@ -61,6 +63,7 @@ struct OnboardingStep: Identifiable, Equatable {
     ) {
         self.title = title
         self.description = description
+        self.content = content
         self.illustration = illustration
         self.actionText = actionText
         self.interactionType = interactionType
@@ -230,8 +233,9 @@ extension OnboardingStep {
 
 extension OnboardingStep {
     static let preview = OnboardingStep(
-        title: "Welcome to LifeLaunch",
+        title: "Welcome to MyBudget",
         description: "This is a preview step for testing the onboarding system with premium animations and interactions.",
+        content: "Additional content for testing purposes",
         illustration: "✨",
         actionText: "Continue",
         interactionType: .tap,

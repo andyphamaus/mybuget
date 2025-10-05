@@ -27,7 +27,7 @@ struct BudgetView: View {
                         onHelpTapped: { 
                             OnboardingPreferences.resetOnboarding()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                NotificationCenter.default.post(name: NSNotification.Name("ShowOnboardingTutorial"), object: nil)
+                                NotificationCenter.default.post(name: Notification.Name.showOnboardingTutorial, object: nil)
                             }
                         },
                         onBudgetTapped: { showingBudgetSelector = true },
@@ -84,7 +84,7 @@ struct BudgetView: View {
                 await viewModel.loadInitialData()
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .onboardingCompleted)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.onboardingCompleted)) { _ in
             Task {
                 // Add small delay to avoid race conditions
                 try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 seconds
