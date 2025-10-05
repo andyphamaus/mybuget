@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocalActivity" representedClassName="LocalActivity" syncable="YES">
+        <attribute name="action" optional="YES" attributeType="String"/>
+        <attribute name="activityDescription" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="metadata" optional="YES" attributeType="String"/>
+        <attribute name="module" optional="YES" attributeType="String"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="LocalTask" representedClassName="LocalTask" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="completedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="detail" optional="YES" attributeType="String"/>
+        <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="modifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="pointEarned" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="remindMeOn" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="sourceType" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalTaskAttachment" inverseName="task" inverseEntity="LocalTaskAttachment"/>
+        <relationship name="steps" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalTaskStep" inverseName="task" inverseEntity="LocalTaskStep"/>
+    </entity>
+    <entity name="LocalTaskAttachment" representedClassName="LocalTaskAttachment" syncable="YES">
+        <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fileData" optional="YES" attributeType="Binary"/>
+        <attribute name="fileName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="mimeType" optional="YES" attributeType="String"/>
+        <attribute name="size" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTask" inverseName="attachments" inverseEntity="LocalTask"/>
+    </entity>
+    <entity name="LocalTaskStep" representedClassName="LocalTaskStep" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="stepName" optional="YES" attributeType="String"/>
+        <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTask" inverseName="steps" inverseEntity="LocalTask"/>
+    </entity>
+    <entity name="LocalUser" representedClassName="LocalUser" syncable="YES">
+        <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="currentLevel" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="fullName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="profileImageUrl" optional="YES" attributeType="String"/>
+        <attribute name="smartNotificationsEnabled" optional="NO" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="totalPoints" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isPremiumUser" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+    </entity>
+    
+    <!-- Budget Management Entities - CORRECTED STRUCTURE -->
+    <entity name="LocalBudget" representedClassName="LocalBudget" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="userId" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="currencyCode" optional="NO" attributeType="String" defaultValueString="AUD"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="periods" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetPeriod" inverseName="budget" inverseEntity="LocalBudgetPeriod"/>
+        <relationship name="sections" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetSection" inverseName="budget" inverseEntity="LocalBudgetSection"/>
+        <relationship name="sectionCategoryMappings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetSectionCategory" inverseName="budget" inverseEntity="LocalBudgetSectionCategory"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalTransaction" inverseName="budget" inverseEntity="LocalTransaction"/>
+        <relationship name="liabilities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalLiability" inverseName="budget" inverseEntity="LocalLiability"/>
+        <relationship name="recurringSeries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalRecurringTransactionSeries" inverseName="budget" inverseEntity="LocalRecurringTransactionSeries"/>
+    </entity>
+    
+    <entity name="LocalHeadCategory" representedClassName="LocalHeadCategory" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="preferType" optional="NO" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="displayOrder" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isSystem" optional="NO" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="ownerUserId" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalCategory" inverseName="headCategory" inverseEntity="LocalCategory"/>
+    </entity>
+    
+    <entity name="LocalCategory" representedClassName="LocalCategory" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="displayOrder" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isSystem" optional="NO" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="ownerUserId" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="headCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalHeadCategory" inverseName="categories" inverseEntity="LocalHeadCategory"/>
+        <relationship name="sectionMappings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalPeriodSectionCategory" inverseName="category" inverseEntity="LocalPeriodSectionCategory"/>
+        <relationship name="budgetSectionMappings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetSectionCategory" inverseName="category" inverseEntity="LocalBudgetSectionCategory"/>
+        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetPeriodPlan" inverseName="category" inverseEntity="LocalBudgetPeriodPlan"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocalTransaction" inverseName="category" inverseEntity="LocalTransaction"/>
+        <relationship name="recurringSeries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalRecurringTransactionSeries" inverseName="category" inverseEntity="LocalRecurringTransactionSeries"/>
+    </entity>
+    
+    <entity name="LocalBudgetPeriod" representedClassName="LocalBudgetPeriod" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="periodType" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="NO" attributeType="String"/>
+        <attribute name="endDate" optional="NO" attributeType="String"/>
+        <attribute name="status" optional="NO" attributeType="String" defaultValueString="OPEN"/>
+        <attribute name="sequence" optional="NO" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="budget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudget" inverseName="periods" inverseEntity="LocalBudget"/>
+        <relationship name="sections" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalPeriodSection" inverseName="period" inverseEntity="LocalPeriodSection"/>
+        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetPeriodPlan" inverseName="period" inverseEntity="LocalBudgetPeriodPlan"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalTransaction" inverseName="period" inverseEntity="LocalTransaction"/>
+    </entity>
+    
+    <!-- NEW: Period-specific sections -->
+    <entity name="LocalPeriodSection" representedClassName="LocalPeriodSection" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="displayOrder" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="typeHint" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="period" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudgetPeriod" inverseName="sections" inverseEntity="LocalBudgetPeriod"/>
+        <relationship name="categoryMappings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalPeriodSectionCategory" inverseName="section" inverseEntity="LocalPeriodSectionCategory"/>
+        <relationship name="plans" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetPeriodPlan" inverseName="section" inverseEntity="LocalBudgetPeriodPlan"/>
+    </entity>
+    
+    <!-- NEW: Junction table for Period Section + Category -->
+    <entity name="LocalPeriodSectionCategory" representedClassName="LocalPeriodSectionCategory" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="displayOrder" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalPeriodSection" inverseName="categoryMappings" inverseEntity="LocalPeriodSection"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalCategory" inverseName="sectionMappings" inverseEntity="LocalCategory"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="section"/>
+                <constraint value="category"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    
+    <!-- NEW: Period Plan with Section link -->
+    <entity name="LocalBudgetPeriodPlan" representedClassName="LocalBudgetPeriodPlan" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="type" optional="NO" attributeType="String"/>
+        <attribute name="amountCents" optional="NO" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="period" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudgetPeriod" inverseName="plans" inverseEntity="LocalBudgetPeriod"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalPeriodSection" inverseName="plans" inverseEntity="LocalPeriodSection"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalCategory" inverseName="plans" inverseEntity="LocalCategory"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="period"/>
+                <constraint value="category"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    
+    <entity name="LocalTransaction" representedClassName="LocalTransaction" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="type" optional="NO" attributeType="String"/>
+        <attribute name="amountCents" optional="NO" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="transactionDate" optional="NO" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="attachmentPath" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="budget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudget" inverseName="transactions" inverseEntity="LocalBudget"/>
+        <relationship name="period" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudgetPeriod" inverseName="transactions" inverseEntity="LocalBudgetPeriod"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalCategory" inverseName="transactions" inverseEntity="LocalCategory"/>
+        <relationship name="recurringSeries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalRecurringTransactionSeries" inverseName="transactions" inverseEntity="LocalRecurringTransactionSeries"/>
+        <relationship name="liability" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalLiability" inverseName="payments" inverseEntity="LocalLiability"/>
+    </entity>
+    
+    <entity name="LocalRecurringTransactionSeries" representedClassName="LocalRecurringTransactionSeries" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="type" optional="NO" attributeType="String"/>
+        <attribute name="amountCents" optional="NO" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="NO" attributeType="String"/>
+        <attribute name="endCondition" optional="NO" attributeType="String"/>
+        <attribute name="untilDate" optional="YES" attributeType="String"/>
+        <attribute name="count" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="frequency" optional="NO" attributeType="String"/>
+        <attribute name="interval" optional="NO" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="isPaused" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="nextRunDate" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="budget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudget" inverseName="recurringSeries" inverseEntity="LocalBudget"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalCategory" inverseName="recurringSeries" inverseEntity="LocalCategory"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalTransaction" inverseName="recurringSeries" inverseEntity="LocalTransaction"/>
+    </entity>
+    
+    <entity name="LocalLiability" representedClassName="LocalLiability" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="lender" optional="YES" attributeType="String"/>
+        <attribute name="principalCents" optional="NO" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="currencyCode" optional="NO" attributeType="String" defaultValueString="AUD"/>
+        <attribute name="interestRateBps" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="compounding" optional="NO" attributeType="String" defaultValueString="MONTHLY"/>
+        <attribute name="startDate" optional="NO" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="String"/>
+        <attribute name="paymentDayOfMonth" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
+        <attribute name="status" optional="NO" attributeType="String" defaultValueString="OPEN"/>
+        <attribute name="currentBalanceCents" optional="NO" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="budget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudget" inverseName="liabilities" inverseEntity="LocalBudget"/>
+        <relationship name="payments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocalTransaction" inverseName="liability" inverseEntity="LocalTransaction"/>
+    </entity>
+    
+    <!-- DEPRECATED ENTITIES - Will be removed in future migration -->
+    <entity name="LocalBudgetSection" representedClassName="LocalBudgetSection" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="name" optional="NO" attributeType="String"/>
+        <attribute name="displayOrder" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="typeHint" optional="YES" attributeType="String"/>
+        <attribute name="isArchived" optional="NO" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="budget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudget" inverseName="sections" inverseEntity="LocalBudget"/>
+        <relationship name="categoryMappings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalBudgetSectionCategory" inverseName="section" inverseEntity="LocalBudgetSectionCategory"/>
+    </entity>
+    
+    <entity name="LocalBudgetSectionCategory" representedClassName="LocalBudgetSectionCategory" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="displayOrder" optional="NO" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="budget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudget" inverseName="sectionCategoryMappings" inverseEntity="LocalBudget"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalBudgetSection" inverseName="categoryMappings" inverseEntity="LocalBudgetSection"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalCategory" inverseName="budgetSectionMappings" inverseEntity="LocalCategory"/>
+    </entity>
+    
+    <entity name="LocalBudgetCategoryPlan" representedClassName="LocalBudgetCategoryPlan" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="String"/>
+        <attribute name="type" optional="NO" attributeType="String"/>
+        <attribute name="amountCents" optional="NO" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    
+    <!-- Smart Analytics Insights -->
+    <entity name="LocalSmartInsight" representedClassName="LocalSmartInsight" syncable="YES" >
+        <attribute name="id" optional="NO" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="type" optional="NO" attributeType="String"/>
+        <attribute name="title" optional="NO" attributeType="String"/>
+        <attribute name="insightDescription" optional="NO" attributeType="String"/>
+        <attribute name="priority" optional="NO" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="isActionable" optional="NO" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="relatedCategoryId" optional="YES" attributeType="String"/>
+        <attribute name="relatedPeriodId" optional="YES" attributeType="String"/>
+        <attribute name="createdDate" optional="NO" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isRead" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isDismissed" optional="NO" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="uniqueKey" optional="NO" attributeType="String"/>
+    </entity>
+    
+    <!-- Notes Module Entities -->
+    <entity name="LocalNote" representedClassName="LocalNote" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="isPinned" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isLocked" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="colorTheme" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="reminderAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalNoteTag" inverseName="notes" inverseEntity="LocalNoteTag"/>
+        <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalNoteAttachment" inverseName="note" inverseEntity="LocalNoteAttachment"/>
+    </entity>
+    
+    <entity name="LocalNoteTag" representedClassName="LocalNoteTag" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="colorHex" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="usageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastUsedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocalNote" inverseName="tags" inverseEntity="LocalNote"/>
+    </entity>
+    
+    <entity name="LocalNoteAttachment" representedClassName="LocalNoteAttachment" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="filename" optional="YES" attributeType="String"/>
+        <attribute name="fileData" optional="YES" attributeType="Binary"/>
+        <attribute name="fileSize" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalNote" inverseName="attachments" inverseEntity="LocalNote"/>
+    </entity>
+</model>

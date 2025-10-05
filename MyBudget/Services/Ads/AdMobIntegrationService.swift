@@ -77,11 +77,15 @@ class AdMobIntegrationService: NSObject, ObservableObject {
     
     private override init() {
         super.init()
-        setupAdMob()
+        // Don't initialize immediately - wait for explicit call
     }
     
     // MARK: - Initialization
-    
+
+    func startInitialization() {
+        setupAdMob()
+    }
+
     func setupAdMob() {
         Task {
             print("🚀 Starting AdMob setup process...")

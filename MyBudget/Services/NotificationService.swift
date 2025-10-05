@@ -350,9 +350,12 @@ class NotificationService: NSObject, ObservableObject {
     ) async {
 
         // Check for spending streaks or improvements
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
         let thisMonthTransactions = transactions.filter { transaction in
             guard let dateString = transaction.transactionDate,
-                  let date = ISO8601DateFormatter().date(from: dateString) else { return false }
+                  let date = dateFormatter.date(from: dateString) else { return false }
             return Calendar.current.isDate(date, equalTo: Date(), toGranularity: .month)
         }
 

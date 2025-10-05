@@ -3,16 +3,27 @@ import SwiftUI
 // MARK: - Master Budget View with 3 Sub-Tabs
 
 struct BudgetView: View {
-    @StateObject private var viewModel = BudgetViewModel()
-    @StateObject private var smartAnalyticsService = SmartAnalyticsService()
     @EnvironmentObject var authService: LocalAuthenticationService
-    
+
+    var body: some View {
+        BudgetViewInternal(authService: authService)
+    }
+}
+
+struct BudgetViewInternal: View {
+    @StateObject private var viewModel: BudgetViewModel
+    @StateObject private var smartAnalyticsService = SmartAnalyticsService()
+
     @State private var showingBudgetEdit = false
     @State private var showingBudgetSelector = false
     @State private var showingAddTransaction = false
     @State private var showingAddPlannedAmount = false
     @State private var showingRecurringTransactions = false
     @State private var showingAlerts = false
+
+    init(authService: LocalAuthenticationService) {
+        _viewModel = StateObject(wrappedValue: BudgetViewModel(authService: authService))
+    }
     
     var body: some View {
         NavigationView {

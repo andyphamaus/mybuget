@@ -5,6 +5,10 @@ import CoreData
 
 @MainActor
 class BudgetViewModel: ObservableObject {
+    // MARK: - Properties
+    private let authService: LocalAuthenticationService
+    private let userId: String
+
     // MARK: - Published Properties
 
     @Published var budgets: [LocalBudget] = []
@@ -62,11 +66,15 @@ class BudgetViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    init(budgetService: BudgetService? = nil,
+    init(authService: LocalAuthenticationService? = nil,
+         budgetService: BudgetService? = nil,
          categoryService: CategoryService? = nil,
          transactionService: TransactionService? = nil,
          planningService: PlanningService? = nil) {
 
+        // If authService is provided, use it; otherwise create a temporary one
+        self.authService = authService ?? LocalAuthenticationService()
+        self.userId = getUserIdFromAuth()
         self.budgetService = budgetService ?? BudgetService()
         self.categoryService = categoryService ?? CategoryService()
         self.transactionService = transactionService ?? TransactionService()
@@ -169,7 +177,7 @@ class BudgetViewModel: ObservableObject {
             try budgetService.cleanupDuplicateSectionCategoryMappings()
 
             // Load budgets for default user (used after reset)
-            budgetService.loadBudgets(for: "demo-user")
+            budgetService.loadBudgets(for: getCurrentUserId())
 
             // Load categories
             categoryService.loadCategories()
@@ -710,7 +718,7 @@ class BudgetViewModel: ObservableObject {
             try await Task.sleep(nanoseconds: 200_000_000) // 0.2 seconds
 
             // Refresh budget data to ensure everything is loaded
-            budgetService.loadBudgets(for: "demo-user")
+            budgetService.loadBudgets(for: getCurrentUserId())
             await refreshCurrentBudgetData()
 
 
@@ -969,7 +977,7 @@ class BudgetViewModel: ObservableObject {
         try budgetService.updateBudget(currentBudget, name: name, icon: icon, color: color, currencyCode: currencyCode)
 
         // Reload budget data to reflect changes
-        budgetService.loadBudgets(for: "demo-user")
+        budgetService.loadBudgets(for: getCurrentUserId())
         await refreshCurrentBudgetData()
 
         await MainActor.run {
@@ -979,9 +987,16 @@ class BudgetViewModel: ObservableObject {
 
     // MARK: - Helper Methods
 
+    private func getUserIdFromAuth() -> String {
+        // Use real authenticated user ID when available
+        if let userId = authService.currentUser?.id {
+            return userId.uuidString
+        }
+        return "demo-user" // Fallback for development/testing
+    }
+
     private func getCurrentUserId() -> String {
-        // This should come from authentication service
-        return "demo-user" // Placeholder
+        return userId
     }
 
 }

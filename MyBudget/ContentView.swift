@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authService: AuthenticationService
-    
+    @EnvironmentObject var localAuthService: LocalAuthenticationService
+
     var body: some View {
         Group {
             switch authService.authenticationState {
@@ -18,21 +19,76 @@ struct ContentView: View {
             case .authenticating:
                 LoadingView()
             case .authenticated:
-                MainBudgetView()
+                BudgetView()
             }
         }
     }
 }
 
 struct LoadingView: View {
+    @State private var isAnimating = false
+
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "leaf.fill")
-                .font(.system(size: 60))
-                .foregroundColor(.green)
-            
-            ProgressView("Signing in...")
-                .tint(.green)
+        ZStack {
+            // Background
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 0.1, green: 0.8, blue: 0.6),
+                    Color(red: 0.2, green: 0.9, blue: 0.7)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+
+            VStack(spacing: 30) {
+                // Logo
+                ZStack {
+                    Circle()
+                        .fill(Color.white)
+                        .frame(width: 80, height: 80)
+                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
+
+                    Image(systemName: "dollarsign.circle.fill")
+                        .font(.system(size: 40, weight: .bold))
+                        .foregroundColor(.green)
+                }
+                .scaleEffect(isAnimating ? 1.0 : 0.8)
+                .animation(.spring(response: 0.6, dampingFraction: 0.8), value: isAnimating)
+
+                // Loading text
+                VStack(spacing: 16) {
+                    Text("Signing In")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+
+                    Text("Preparing your financial dashboard...")
+                        .font(.subheadline)
+                        .foregroundColor(.white.opacity(0.8))
+                        .multilineTextAlignment(.center)
+
+                    // Loading dots
+                    HStack(spacing: 8) {
+                        ForEach(0..<3, id: \.self) { index in
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 8, height: 8)
+                                .scaleEffect(isAnimating ? 1.0 : 0.5)
+                                .opacity(isAnimating ? 1.0 : 0.5)
+                                .animation(
+                                    .easeInOut(duration: 0.6)
+                                    .repeatForever()
+                                    .delay(Double(index) * 0.2),
+                                    value: isAnimating
+                                )
+                        }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            isAnimating = true
         }
     }
 }

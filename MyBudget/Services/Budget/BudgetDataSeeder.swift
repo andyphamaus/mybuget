@@ -149,7 +149,7 @@ class BudgetDataSeeder: ObservableObject {
         let calendar = Calendar.current
         let now = Date()
         let startOfMonth = calendar.dateInterval(of: .month, for: now)?.start ?? now
-        let endOfMonth = calendar.dateInterval(of: .month, for: now)?.end ?? now
+        let endOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!.endOfMonth
         
         let currentPeriod = try budgetService.createPeriod(
             for: defaultBudget,
@@ -436,7 +436,7 @@ class BudgetDataSeeder: ObservableObject {
         let calendar = Calendar.current
         let now = Date()
         let startOfMonth = calendar.dateInterval(of: .month, for: now)?.start ?? now
-        let endOfMonth = calendar.dateInterval(of: .month, for: now)?.end ?? now
+        let endOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!.endOfMonth
         
         let currentPeriod = try budgetService.createPeriod(
             for: defaultBudget,
@@ -824,5 +824,15 @@ class BudgetDataSeeder: ObservableObject {
         budgetService.loadBudgets()
         
         print("✅ All budget data cleared")
+    }
+}
+
+// MARK: - Date Extensions
+extension Date {
+    var endOfMonth: Date {
+        let calendar = Calendar.current
+        let nextMonth = calendar.date(byAdding: .month, value: 1, to: self)!
+        let startOfNextMonth = calendar.dateInterval(of: .month, for: nextMonth)!.start
+        return calendar.date(byAdding: .second, value: -1, to: startOfNextMonth)!
     }
 }

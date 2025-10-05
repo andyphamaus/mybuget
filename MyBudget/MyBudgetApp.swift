@@ -11,11 +11,13 @@ import SwiftUI
 struct MyBudgetApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var authService = AuthenticationService()
+    @StateObject private var localAuthService = LocalAuthenticationService()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EnhancedSplashScreenView()
                 .environmentObject(authService)
+                .environmentObject(localAuthService)
         }
     }
 }
