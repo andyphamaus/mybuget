@@ -1,0 +1,345 @@
+import SwiftUI
+
+struct HomeView: View {
+    @EnvironmentObject var authService: LocalAuthenticationService
+    @StateObject private var taskService = LocalTaskService()
+    @StateObject private var activityService = LocalActivityService()
+    @State private var selectedTab = 0 // 0 = Dashboard, 1 = Activity
+    @State private var showingAddTask = false
+    @State private var animationTrigger = UUID()
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                // Header Section with Blue Background
+                VStack(spacing: 0) {
+                    // Header
+                    HomeHeaderView(
+                        user: authService.currentUser,
+                        selectedTab: selectedTab
+                    )
+                    
+                    // Tab selector
+                    HomeTabSelector(selectedTab: $selectedTab)
+                }
+                .background(ThemeColors.Home.gradient)
+                
+                // Content Section with Gray Background
+                Group {
+                    switch selectedTab {
+                case 0:
+                    EnhancedDashboardView(
+                        onAddTask: { showingAddTask = true }
+                    )
+                    .id(animationTrigger)
+                case 1:
+                    SimplifiedHomeActivityView(activityService: activityService)
+                        .id(animationTrigger)
+                default:
+                    EnhancedDashboardView(
+                        onAddTask: { showingAddTask = true }
+                    )
+                    .id(animationTrigger)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.systemGroupedBackground))
+                .transition(.asymmetric(
+                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                    removal: .move(edge: .leading).combined(with: .opacity)
+                ))
+                
+                Spacer()
+            }
+            .background(Color(.systemGroupedBackground))
+            .navigationBarHidden(true)
+        }
+        .sheet(isPresented: $showingAddTask) {
+            Text("Add Task")
+                .font(.title)
+                .padding()
+            // AddTaskView needs TaskService, not LocalTaskService - temporarily disabled
+        }
+        .onChange(of: selectedTab) { oldValue, newValue in
+            animationTrigger = UUID()
+        }
+    }
+}
+
+// Simplified Dashboard View
+struct SimplifiedHomeDashboardView: View {
+    @ObservedObject var taskService: LocalTaskService
+    let onAddTask: () -> Void
+    
+    var completedTasksToday: Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        return taskService.tasks.filter { task in
+            guard let completedDate = task.completedDate else { return false }
+            return Calendar.current.isDate(completedDate, inSameDayAs: today) && task.isCompleted
+        }.count
+    }
+    
+    var totalTasksToday: Int {
+        let today = Calendar.current.startOfDay(for: Date())
+        return taskService.tasks.filter { task in
+            guard let dueDate = task.dueDate else { return false }
+            return Calendar.current.isDate(dueDate, inSameDayAs: today)
+        }.count
+    }
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                // Empty state or placeholder
+                EmptyStateView(
+                    icon: "house.fill",
+                    title: "Welcome to LifeLaunch",
+                    subtitle: "Use the tabs below to navigate",
+                    actionTitle: nil,
+                    action: nil
+                )
+                .padding()
+                
+                Spacer()
+            }
+            .padding(.vertical)
+        }
+    }
+}
+
+// Simplified Activity View
+struct SimplifiedHomeActivityView: View {
+    @ObservedObject var activityService: LocalActivityService
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Recent Activity")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                    .padding(.horizontal)
+                
+                LazyVStack(spacing: 12) {
+                    ForEach(activityService.activities) { activity in
+                        ActivityItemRowView(activity: activity)
+                    }
+                    
+                    if activityService.activities.isEmpty {
+                        EmptyStateView(
+                            icon: "clock.arrow.circlepath",
+                            title: "No Activity Yet",
+                            subtitle: "Your activities will appear here!",
+                            actionTitle: nil,
+                            action: nil
+                        )
+                        .padding()
+                    }
+                }
+                .padding(.horizontal)
+                
+                Spacer()
+            }
+            .padding(.vertical)
+        }
+    }
+}
+
+// Supporting Views
+struct StatCard: View {
+    let title: String
+    let value: String
+    let icon: String
+    let color: Color
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(color)
+            
+            Text(value)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.primary)
+            
+            Text(title)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+    }
+}
+
+struct TaskRowView: View {
+    let task: LocalTask
+    
+    var body: some View {
+        HStack {
+            Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "circle")
+                .foregroundColor(task.isCompleted ? .green : .gray)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(task.title ?? "Untitled Task")
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .strikethrough(task.isCompleted)
+                
+                if let dueDate = task.dueDate {
+                    Text(dueDate, style: .date)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+            
+            Spacer()
+            
+            if task.isCompleted {
+                Text("Done")
+                    .font(.caption)
+                    .foregroundColor(.green)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.green.opacity(0.1))
+                    .cornerRadius(8)
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(10)
+    }
+}
+
+struct ActivityRowView: View {
+    let task: LocalTask
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(.green)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Completed: \(task.title ?? "Task")")
+                    .font(.body)
+                    .foregroundColor(.primary)
+                
+                if let completedDate = task.completedDate {
+                    Text(completedDate, style: .relative)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+            
+            Spacer()
+            
+            Text("+\(task.pointEarned) pts")
+                .font(.caption)
+                .foregroundColor(.blue)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(8)
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(10)
+    }
+}
+
+struct ActivityItemRowView: View {
+    let activity: LocalActivity
+    
+    var body: some View {
+        HStack {
+            Image(systemName: activity.icon)
+                .foregroundColor(Color(activity.color))
+                .font(.title2)
+            
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(activity.module ?? "")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    Text("•")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    Text(activity.action ?? "")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                Text(activity.title ?? "")
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .lineLimit(1)
+                
+                if let description = activity.activityDescription {
+                    Text(description)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
+            }
+            
+            Spacer()
+            
+            Text(activity.timeAgo)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(10)
+    }
+}
+
+struct EmptyStateView: View {
+    let icon: String
+    let title: String
+    let subtitle: String
+    let actionTitle: String?
+    let action: (() -> Void)?
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            Image(systemName: icon)
+                .font(.system(size: 48))
+                .foregroundColor(.gray)
+            
+            VStack(spacing: 8) {
+                Text(title)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+            
+            if let actionTitle = actionTitle, let action = action {
+                Button(actionTitle) {
+                    action()
+                }
+                .font(.body)
+                .foregroundColor(.white)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color.blue)
+                .cornerRadius(10)
+            }
+        }
+        .padding(40)
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+            .environmentObject(LocalAuthenticationService())
+    }
+}

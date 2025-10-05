@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 90;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49C477192E7436660011C93E /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 49C4768A2E7435310011C93E /* GoogleMobileAds */; };
+		49C4771A2E7436660011C93E /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 49C4768C2E7435320011C93E /* GoogleUserMessagingPlatform */; };
+		49CBD0E62E92A2E700FBBDC8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 49C476912E7438010011C93E /* GoogleSignIn */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		497605DC2E7422BA008CF5FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 497605C02E7422B9008CF5FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 497605C72E7422B9008CF5FB;
+			remoteInfo = MyBudget;
+		};
+		497605E62E7422BA008CF5FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 497605C02E7422B9008CF5FB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 497605C72E7422B9008CF5FB;
+			remoteInfo = MyBudget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		497605C82E7422B9008CF5FB /* MyBudget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBudget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		497605DB2E7422BA008CF5FB /* MyGardenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyGardenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		497605E52E7422BA008CF5FB /* MyGardenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyGardenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		497605CA2E7422B9008CF5FB /* MyBudget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyBudget;
+			sourceTree = "<group>";
+		};
+		497605DE2E7422BA008CF5FB /* MyGardenTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyGardenTests;
+			sourceTree = "<group>";
+		};
+		497605E82E7422BA008CF5FB /* MyGardenUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MyGardenUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		497605C52E7422B9008CF5FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				49CBD0E62E92A2E700FBBDC8 /* GoogleSignIn in Frameworks */,
+				49C4771A2E7436660011C93E /* GoogleUserMessagingPlatform in Frameworks */,
+				49C477192E7436660011C93E /* GoogleMobileAds in Frameworks */,
+			);
+		};
+		497605D82E7422BA008CF5FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+		497605E22E7422BA008CF5FB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+			);
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		497605BF2E7422B9008CF5FB = {
+			isa = PBXGroup;
+			children = (
+				497605CA2E7422B9008CF5FB /* MyBudget */,
+				497605DE2E7422BA008CF5FB /* MyGardenTests */,
+				497605E82E7422BA008CF5FB /* MyGardenUITests */,
+				497605C92E7422B9008CF5FB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		497605C92E7422B9008CF5FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				497605C82E7422B9008CF5FB /* MyBudget.app */,
+				497605DB2E7422BA008CF5FB /* MyGardenTests.xctest */,
+				497605E52E7422BA008CF5FB /* MyGardenUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		497605C72E7422B9008CF5FB /* MyBudget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 497605EF2E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyBudget" */;
+			buildPhases = (
+				497605C42E7422B9008CF5FB /* Sources */,
+				497605C52E7422B9008CF5FB /* Frameworks */,
+				497605C62E7422B9008CF5FB /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				497605CA2E7422B9008CF5FB /* MyBudget */,
+			);
+			name = MyBudget;
+			packageProductDependencies = (
+				49C4768A2E7435310011C93E /* GoogleMobileAds */,
+				49C4768C2E7435320011C93E /* GoogleUserMessagingPlatform */,
+				49C476912E7438010011C93E /* GoogleSignIn */,
+			);
+			productName = MyBudget;
+			productReference = 497605C82E7422B9008CF5FB /* MyBudget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		497605DA2E7422BA008CF5FB /* MyGardenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 497605F22E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenTests" */;
+			buildPhases = (
+				497605D72E7422BA008CF5FB /* Sources */,
+				497605D82E7422BA008CF5FB /* Frameworks */,
+				497605D92E7422BA008CF5FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				497605DD2E7422BA008CF5FB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				497605DE2E7422BA008CF5FB /* MyGardenTests */,
+			);
+			name = MyGardenTests;
+			productName = MyGardenTests;
+			productReference = 497605DB2E7422BA008CF5FB /* MyGardenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		497605E42E7422BA008CF5FB /* MyGardenUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 497605F52E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenUITests" */;
+			buildPhases = (
+				497605E12E7422BA008CF5FB /* Sources */,
+				497605E22E7422BA008CF5FB /* Frameworks */,
+				497605E32E7422BA008CF5FB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				497605E72E7422BA008CF5FB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				497605E82E7422BA008CF5FB /* MyGardenUITests */,
+			);
+			name = MyGardenUITests;
+			productName = MyGardenUITests;
+			productReference = 497605E52E7422BA008CF5FB /* MyGardenUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		497605C02E7422B9008CF5FB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					497605C72E7422B9008CF5FB = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					497605DA2E7422BA008CF5FB = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 497605C72E7422B9008CF5FB;
+					};
+					497605E42E7422BA008CF5FB = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 497605C72E7422B9008CF5FB;
+					};
+				};
+			};
+			buildConfigurationList = 497605C32E7422B9008CF5FB /* Build configuration list for PBXProject "MyBudget" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 497605BF2E7422B9008CF5FB;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				49C476892E7435300011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				49C4768B2E7435320011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
+				49C476902E7438000011C93E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
+			preferredProjectObjectVersion = 90;
+			productRefGroup = 497605C92E7422B9008CF5FB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				497605C72E7422B9008CF5FB /* MyBudget */,
+				497605DA2E7422BA008CF5FB /* MyGardenTests */,
+				497605E42E7422BA008CF5FB /* MyGardenUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		497605C62E7422B9008CF5FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		497605D92E7422BA008CF5FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+		497605E32E7422BA008CF5FB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		497605C42E7422B9008CF5FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		497605D72E7422BA008CF5FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		497605E12E7422BA008CF5FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		497605DD2E7422BA008CF5FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 497605C72E7422B9008CF5FB /* MyBudget */;
+			targetProxy = 497605DC2E7422BA008CF5FB /* PBXContainerItemProxy */;
+		};
+		497605E72E7422BA008CF5FB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 497605C72E7422B9008CF5FB /* MyBudget */;
+			targetProxy = 497605E62E7422BA008CF5FB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		497605ED2E7422BA008CF5FB /* Debug configuration for PBXProject "MyBudget" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		497605EE2E7422BA008CF5FB /* Release configuration for PBXProject "MyBudget" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		497605F02E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyBudget" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyBudget/MyBudget.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyBudget-Info.plist";
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-7184249493869519~2788569307";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs microphone access to record your meetings for transcription. All audio is processed and stored locally on your device only.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app uses on-device speech recognition to convert your meeting audio into text notes. All processing happens locally - no audio leaves your device.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This app uses advertising ID to provide personalized ads and improve your experience. You can opt out in Settings.";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		497605F12E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyBudget" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyBudget/MyBudget.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MyBudget-Info.plist";
+				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-7184249493869519~2788569307";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs microphone access to record your meetings for transcription. All audio is processed and stored locally on your device only.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app uses on-device speech recognition to convert your meeting audio into text notes. All processing happens locally - no audio leaves your device.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This app uses advertising ID to provide personalized ads and improve your experience. You can opt out in Settings.";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		497605F32E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBudget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBudget";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		497605F42E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenTests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBudget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBudget";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		497605F62E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = MyBudget;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		497605F72E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenUITests" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35C6TPQNMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = MyBudget;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		497605C32E7422B9008CF5FB /* Build configuration list for PBXProject "MyBudget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				497605ED2E7422BA008CF5FB /* Debug configuration for PBXProject "MyBudget" */,
+				497605EE2E7422BA008CF5FB /* Release configuration for PBXProject "MyBudget" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		497605EF2E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyBudget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				497605F02E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyBudget" */,
+				497605F12E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyBudget" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		497605F22E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				497605F32E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenTests" */,
+				497605F42E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenTests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+		497605F52E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				497605F62E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenUITests" */,
+				497605F72E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenUITests" */,
+			);
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		49C476892E7435300011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.11.0;
+			};
+		};
+		49C4768B2E7435320011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-user-messaging-platform";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		49C476902E7438000011C93E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		49C4768A2E7435310011C93E /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49C476892E7435300011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		49C4768C2E7435320011C93E /* GoogleUserMessagingPlatform */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49C4768B2E7435320011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
+			productName = GoogleUserMessagingPlatform;
+		};
+		49C476912E7438010011C93E /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49C476902E7438000011C93E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 497605C02E7422B9008CF5FB /* Project object */;
+}
