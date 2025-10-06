@@ -160,22 +160,52 @@ class SmartAnalyticsService: ObservableObject {
     private var analysisQueue = DispatchQueue(label: "analytics", qos: .userInitiated)
     
     // Performance optimization properties
-    private var patternCache: [String: Any] = [:]
+    private var patternCache: [String: Any] = [:] {
+        didSet {
+            if patternCache.count > maxCacheSize {
+                let keysToRemove = Array(patternCache.keys.prefix(patternCache.count - maxCacheSize))
+                keysToRemove.forEach { patternCache.removeValue(forKey: $0) }
+            }
+        }
+    }
     private var cacheExpiryTime: TimeInterval = 3600 // 1 hour
     private var lastCacheUpdate: Date = Date.distantPast
-    
+
     // Advanced caching
-    private var healthScoreCache: (score: FinancialHealthScore, expiry: Date)?
-    private var anomalyCache: [String: (anomalies: [AnomalyResult], expiry: Date)] = [:]
-    private var transactionHashCache: [String: Int] = [:] // categoryId -> transaction hash
-    
+    private var healthScoreCache: (score: FinancialHealthScore, expiry: Date)? {
+        didSet {
+            // Clear old health score cache
+            if let cached = healthScoreCache, Date().timeIntervalSince(cached.expiry) > 0 {
+                healthScoreCache = nil
+            }
+        }
+    }
+    private var anomalyCache: [String: (anomalies: [AnomalyResult], expiry: Date)] = [:] {
+        didSet {
+            // Clear expired entries
+            let now = Date()
+            anomalyCache = anomalyCache.compactMapValues { entry in
+                now < entry.expiry ? entry : nil
+            }
+        }
+    }
+    private var transactionHashCache: [String: Int] = [:] // categoryId -> transaction hash {
+        didSet {
+            if transactionHashCache.count > maxCacheSize {
+                let keysToRemove = Array(transactionHashCache.keys.prefix(transactionHashCache.count - maxCacheSize))
+                keysToRemove.forEach { transactionHashCache.removeValue(forKey: $0) }
+            }
+        }
+    }
+
     // Performance settings
     private let maxCacheSize: Int = 1000
     private let batchSize: Int = 100
     private let maxParallelTasks: Int = 4
-    
+
     // Memory management
     private var memoryWarningObserver: NSObjectProtocol?
+    private var performanceCleanupTimer: Timer?
     
     // MARK: - Initialization
     init() {
@@ -811,8 +841,8 @@ class SmartAnalyticsService: ObservableObject {
     }
     
     private func setupPerformanceMonitoring() {
-        // Periodic cache cleanup
-        Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
+        // Periodic cache cleanup with proper memory management
+        performanceCleanupTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in
                 await self?.performPeriodicCacheCleanup()
             }
@@ -1068,10 +1098,32 @@ class SmartAnalyticsService: ObservableObject {
     }
     
     deinit {
+        // Clean up all timers to prevent memory leaks
         autoRefreshTimer?.invalidate()
+        autoRefreshTimer = nil
+
+        performanceCleanupTimer?.invalidate()
+        performanceCleanupTimer = nil
+
+        // Remove notification observers
         if let observer = memoryWarningObserver {
             NotificationCenter.default.removeObserver(observer)
         }
+
+        // Clear all caches to release memory
+        patternsCache.removeAll()
+        forecastsCache.removeAll()
+        patternCache.removeAll()
+        anomalyCache.removeAll()
+        transactionHashCache.removeAll()
+        healthScoreCache = nil
+
+        // Clear tracking sets
+        analyzedTransactionIds.removeAll()
+        blacklistedTransactionIds.removeAll()
+
+        // Clear cancellables
+        cancellables.removeAll()
     }
     
     // MARK: - Performance Optimization Methods

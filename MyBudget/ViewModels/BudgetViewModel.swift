@@ -47,7 +47,7 @@ class BudgetViewModel: ObservableObject {
               let colorString = budget.color else {
             return .white
         }
-        return Color(hex: colorString) ?? .white
+        return Color(hex: colorString)
     }
 
     var currentBudgetIcon: String {
@@ -74,13 +74,14 @@ class BudgetViewModel: ObservableObject {
 
         // If authService is provided, use it; otherwise create a temporary one
         self.authService = authService ?? LocalAuthenticationService()
-        self.userId = getUserIdFromAuth()
+        self.userId = getUserIdFromAuth() // Will be updated dynamically
         self.budgetService = budgetService ?? BudgetService()
         self.categoryService = categoryService ?? CategoryService()
         self.transactionService = transactionService ?? TransactionService()
         self.planningService = planningService ?? PlanningService()
 
         setupBindings()
+        setupUserIdObserver()
 
         // Listen for budget reset notifications
         NotificationCenter.default.addObserver(
@@ -296,10 +297,12 @@ class BudgetViewModel: ObservableObject {
             transactionService.loadTransactions(for: period.id)
 
             // Calculate summaries
-            if let budgetId = period.budget?.id {
-                budgetSummary = try budgetService.getBudgetSummary(budget: currentBudget!, period: period)
-                planningSummary = try planningService.getPlanningSummary(for: period.id!)
-                planningComparisons = try planningService.getPlanningComparison(for: period.id!)
+            if let budgetId = period.budget?.id,
+               let currentBudget = currentBudget,
+               let periodId = period.id {
+                budgetSummary = try budgetService.getBudgetSummary(budget: currentBudget, period: period)
+                planningSummary = try planningService.getPlanningSummary(for: periodId)
+                planningComparisons = try planningService.getPlanningComparison(for: periodId)
             }
 
         } catch {
@@ -353,7 +356,9 @@ class BudgetViewModel: ObservableObject {
             notes: notes
         )
 
-        await loadPeriodData(for: currentPeriod!)
+        if let currentPeriod = currentPeriod {
+            await loadPeriodData(for: currentPeriod)
+        }
 
         // Force UI refresh
         await MainActor.run {
@@ -394,8 +399,11 @@ class BudgetViewModel: ObservableObject {
             }
 
             // Additional validation: Ensure no duplicate plans for same category+period
+            guard let currentPeriodId = currentPeriod?.id else {
+                throw BudgetViewModelError.noCurrentPeriod
+            }
             let planRequest: NSFetchRequest<LocalBudgetPeriodPlan> = LocalBudgetPeriodPlan.fetchRequest()
-            planRequest.predicate = NSPredicate(format: "category.id == %@ AND period.id == %@", categoryId, currentPeriod!.id!)
+            planRequest.predicate = NSPredicate(format: "category.id == %@ AND period.id == %@", categoryId, currentPeriodId)
             let existingPlans = try context.fetch(planRequest)
 
             if existingPlans.count > 1 {
@@ -436,7 +444,9 @@ class BudgetViewModel: ObservableObject {
         }
 
         // Reload period data to refresh everything
-        await loadPeriodData(for: currentPeriod!)
+        if let currentPeriod = currentPeriod {
+            await loadPeriodData(for: currentPeriod)
+        }
 
         // Additional explicit UI refresh for sections
         if let budget = currentBudget {
@@ -453,20 +463,29 @@ class BudgetViewModel: ObservableObject {
 
     func deletePlan(_ plan: LocalBudgetPeriodPlan) async throws {
         try planningService.deletePlan(plan)
-        await loadPeriodData(for: currentPeriod!)
+        if let currentPeriod = currentPeriod {
+            await loadPeriodData(for: currentPeriod)
+        }
+
+        // Force UI refresh
+        await MainActor.run {
+            objectWillChange.send()
+        }
     }
 
     // MARK: - Transaction Management
 
     func addTransaction(categoryId: String, type: String, amount: Double, date: Date, notes: String? = nil) async throws {
         guard let budget = currentBudget,
-              let period = currentPeriod else {
+              let budgetId = budget.id,
+              let period = currentPeriod,
+              let periodId = period.id else {
             throw BudgetViewModelError.noBudgetOrPeriodSelected
         }
 
         _ = try transactionService.createTransaction(
-            budgetId: budget.id!,
-            periodId: period.id!,
+            budgetId: budgetId,
+            periodId: periodId,
             categoryId: categoryId,
             type: type,
             amount: amount,
@@ -475,16 +494,35 @@ class BudgetViewModel: ObservableObject {
         )
 
         await loadPeriodData(for: period)
+
+        // Force UI refresh
+        await MainActor.run {
+            objectWillChange.send()
+        }
     }
 
     func deleteTransaction(_ transaction: LocalTransaction) async throws {
         try transactionService.deleteTransaction(transaction)
-        await loadPeriodData(for: currentPeriod!)
+        if let currentPeriod = currentPeriod {
+            await loadPeriodData(for: currentPeriod)
+        }
+
+        // Force UI refresh
+        await MainActor.run {
+            objectWillChange.send()
+        }
     }
 
     func updateTransaction(_ transaction: LocalTransaction, amount: Double? = nil, date: Date? = nil, notes: String? = nil, categoryId: String? = nil) async throws {
         try transactionService.updateTransaction(transaction, amount: amount, date: date, notes: notes, categoryId: categoryId)
-        await loadPeriodData(for: currentPeriod!)
+        if let currentPeriod = currentPeriod {
+            await loadPeriodData(for: currentPeriod)
+        }
+
+        // Force UI refresh
+        await MainActor.run {
+            objectWillChange.send()
+        }
     }
 
     // MARK: - Section Management
@@ -509,6 +547,11 @@ class BudgetViewModel: ObservableObject {
         // Reload current period data to show the new section
         await loadPeriodData(for: currentPeriod)
 
+        // Force UI refresh
+        await MainActor.run {
+            objectWillChange.send()
+        }
+
         return section
     }
 
@@ -532,6 +575,11 @@ class BudgetViewModel: ObservableObject {
         // Reload sections
         if let budget = currentBudget {
             sections = budgetService.getSections(for: budget)
+        }
+
+        // Force UI refresh
+        await MainActor.run {
+            objectWillChange.send()
         }
     }
 
@@ -780,9 +828,12 @@ class BudgetViewModel: ObservableObject {
             // Get all plans from the previous period
 
             // Use Core Data directly to get plans for the previous period
+            guard let periodToCopyFromId = periodToCopyFrom.id else {
+                throw BudgetViewModelError.invalidData
+            }
             let context = PersistenceController.shared.viewContext
             let planRequest: NSFetchRequest<LocalBudgetPeriodPlan> = LocalBudgetPeriodPlan.fetchRequest()
-            planRequest.predicate = NSPredicate(format: "period.id == %@", periodToCopyFrom.id!)
+            planRequest.predicate = NSPredicate(format: "period.id == %@", periodToCopyFromId)
 
             let previousPlans = try context.fetch(planRequest)
 
@@ -961,7 +1012,9 @@ class BudgetViewModel: ObservableObject {
         // Save changes
         do {
             try context.save()
-            await loadPeriodData(for: currentPeriod!)
+            if let currentPeriod = currentPeriod {
+                await loadPeriodData(for: currentPeriod)
+            }
         } catch {
             throw error
         }
@@ -985,6 +1038,31 @@ class BudgetViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Observer Setup
+
+    private func setupUserIdObserver() {
+        // Listen for changes to currentUser
+        authService.$currentUser
+            .compactMap { user in
+                user?.id.uuidString
+            }
+            .removeDuplicates()
+            .sink { [weak self] newUserId in
+                guard let self = self else { return }
+
+                let oldUserId = self.userId
+                self.userId = newUserId
+
+                // If userId changed, reload data for the new user
+                if oldUserId != newUserId {
+                    Task { @MainActor in
+                        await self.refreshCurrentBudgetData()
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     // MARK: - Helper Methods
 
     private func getUserIdFromAuth() -> String {
@@ -1006,6 +1084,7 @@ class BudgetViewModel: ObservableObject {
 enum BudgetViewModelError: LocalizedError {
     case noBudgetOrPeriodSelected
     case noPeriodSelected
+    case noCurrentPeriod
     case invalidData
 
     var errorDescription: String? {
@@ -1014,6 +1093,8 @@ enum BudgetViewModelError: LocalizedError {
             return "No budget or period selected"
         case .noPeriodSelected:
             return "No period selected"
+        case .noCurrentPeriod:
+            return "No current period available"
         case .invalidData:
             return "Invalid data provided"
         }
