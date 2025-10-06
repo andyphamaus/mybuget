@@ -187,6 +187,30 @@ extension OnboardingStep {
                 interactionType: .tap,
                 targetElement: "analytics_chart",
                 order: 8
+            ),
+
+            // Step 9: Feature Not Working ⚠️
+            OnboardingStep(
+                title: "Oops! Something's Not Working ⚠️",
+                description: "Sometimes features don't work as expected. This could be due to bugs, missing dependencies, or temporary issues. Let's see what happens when things go wrong!",
+                content: "This feature is currently experiencing technical difficulties. The sync service may be unavailable, or there might be connectivity issues. Don't worry - your data is safe locally!",
+                illustration: "⚠️",
+                actionText: "Try Anyway",
+                interactionType: .interactive,
+                targetElement: "broken_feature",
+                order: 9,
+                isSkippable: true
+            ),
+
+            // Step 10: Error Handling 🛠️
+            OnboardingStep(
+                title: "Handling Errors Like a Pro 🛠️",
+                description: "Good apps handle errors gracefully. When something doesn't work, you'll see helpful error messages and alternative ways to complete your tasks.",
+                content: "Error: Failed to connect to server. Please check your internet connection and try again. (Error Code: 503) - This is how we keep you informed!",
+                illustration: "🛠️",
+                actionText: "I Understand",
+                interactionType: .tap,
+                order: 10
             )
         ]
     }

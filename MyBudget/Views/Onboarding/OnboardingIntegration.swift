@@ -257,6 +257,10 @@ struct PremiumOnboardingView: View {
             MockTransactionEntry()
         case "analytics":
             MockAnalyticsPreview()
+        case "broken_feature":
+            MockBrokenFeature()
+        case "error_handling":
+            MockErrorScreen()
         case "completion":
             CompletionCelebration()
         default:
@@ -376,8 +380,315 @@ struct PremiumOnboardingView: View {
         case "planning": return BudgetDesignSystem.Colors.savings
         case "transactions": return BudgetDesignSystem.Colors.expense
         case "analytics": return BudgetDesignSystem.Colors.primary
+        case "broken_feature": return BudgetDesignSystem.Colors.warning
+        case "error_handling": return BudgetDesignSystem.Colors.expense
         case "completion": return BudgetDesignSystem.Colors.success
         default: return BudgetDesignSystem.Colors.primary
+        }
+    }
+}
+
+// MARK: - Mock Broken Feature Component
+struct MockBrokenFeature: View {
+    @State private var isLoading = false
+    @State private var showError = false
+    @State private var retryCount = 0
+
+    var body: some View {
+        VStack(spacing: BudgetDesignSystem.Spacing.lg) {
+            // Sync status indicator
+            HStack {
+                Circle()
+                    .fill(BudgetDesignSystem.Colors.warning)
+                    .frame(width: 12, height: 12)
+                    .scaleEffect(isLoading ? 1.5 : 1.0)
+                    .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: isLoading)
+
+                Text("Cloud Sync")
+                    .font(BudgetDesignSystem.Typography.body)
+                    .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+
+                Spacer()
+
+                if showError {
+                    Text("❌")
+                        .font(.title2)
+                } else {
+                    Text("🔄")
+                        .font(.title2)
+                        .rotationEffect(.degrees(isLoading ? 360 : 0))
+                        .animation(.linear(duration: 2.0).repeatForever(autoreverses: false), value: isLoading)
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(BudgetDesignSystem.Colors.surface)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(BudgetDesignSystem.Colors.warning.opacity(0.5), lineWidth: 1)
+                    )
+            )
+
+            // Error message
+            if showError {
+                VStack(alignment: .leading, spacing: BudgetDesignSystem.Spacing.sm) {
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(BudgetDesignSystem.Colors.warning)
+                        Text("Sync Failed")
+                            .font(BudgetDesignSystem.Typography.bodyMedium)
+                            .foregroundColor(BudgetDesignSystem.Colors.warning)
+                    }
+
+                    Text("Unable to connect to sync service. Please check your internet connection and try again.")
+                        .font(BudgetDesignSystem.Typography.caption1)
+                        .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+
+                    Text("Error Code: SYNC_503")
+                        .font(BudgetDesignSystem.Typography.caption1)
+                        .foregroundColor(BudgetDesignSystem.Colors.textSecondary.opacity(0.7))
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(BudgetDesignSystem.Colors.warning.opacity(0.1))
+                )
+            }
+
+            // Retry button
+            Button(action: {
+                isLoading = true
+                showError = false
+                retryCount += 1
+
+                // Simulate failed sync
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    isLoading = false
+                    showError = true
+                }
+            }) {
+                HStack {
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(0.8)
+                    } else {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Retry Sync (\(retryCount))")
+                    }
+                }
+                .font(BudgetDesignSystem.Typography.bodyMedium)
+                .foregroundColor(.white)
+                .padding(.horizontal, BudgetDesignSystem.Spacing.lg)
+                .padding(.vertical, BudgetDesignSystem.Spacing.md)
+                .background(
+                    LinearGradient(
+                        colors: [BudgetDesignSystem.Colors.warning, BudgetDesignSystem.Colors.warning.opacity(0.8)],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                )
+            }
+            .disabled(isLoading)
+
+            // Alternative actions
+            VStack(spacing: BudgetDesignSystem.Spacing.sm) {
+                Text("While we fix the sync issue:")
+                    .font(BudgetDesignSystem.Typography.caption1)
+                    .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+
+                HStack(spacing: BudgetDesignSystem.Spacing.md) {
+                    Button("Work Offline") {
+                        // Simulate offline mode
+                    }
+                    .font(BudgetDesignSystem.Typography.caption1)
+                    .foregroundColor(BudgetDesignSystem.Colors.primary)
+                    .padding(.horizontal, BudgetDesignSystem.Spacing.md)
+                    .padding(.vertical, BudgetDesignSystem.Spacing.sm)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(BudgetDesignSystem.Colors.primary.opacity(0.1))
+                    )
+
+                    Button("Skip This") {
+                        // Skip sync for now
+                    }
+                    .font(BudgetDesignSystem.Typography.caption1)
+                    .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+                    .padding(.horizontal, BudgetDesignSystem.Spacing.md)
+                    .padding(.vertical, BudgetDesignSystem.Spacing.sm)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6)
+                            .fill(BudgetDesignSystem.Colors.surface)
+                    )
+                }
+            }
+        }
+        .onAppear {
+            // Start with loading state
+            isLoading = true
+
+            // Show error after 2 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                isLoading = false
+                showError = true
+            }
+        }
+    }
+}
+
+// MARK: - Mock Error Screen Component
+struct MockErrorScreen: View {
+    @State private var selectedError = 0
+    private let errorTypes = [
+        "Network Connection Lost",
+        "Server Maintenance",
+        "Data Corrupted",
+        "Authentication Failed",
+        "Feature Not Available"
+    ]
+
+    var body: some View {
+        VStack(spacing: BudgetDesignSystem.Spacing.lg) {
+            // Error header
+            HStack {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.title)
+                    .foregroundColor(BudgetDesignSystem.Colors.expense)
+
+                Text("Error Demonstration")
+                    .font(BudgetDesignSystem.Typography.title3)
+                    .foregroundColor(BudgetDesignSystem.Colors.textPrimary)
+
+                Spacer()
+            }
+
+            // Error picker
+            VStack(alignment: .leading, spacing: BudgetDesignSystem.Spacing.sm) {
+                Text("Select Error Type:")
+                    .font(BudgetDesignSystem.Typography.bodyMedium)
+                    .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+
+                Picker("Error Type", selection: $selectedError) {
+                    ForEach(0..<errorTypes.count, id: \.self) { index in
+                        Text(errorTypes[index]).tag(index)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(BudgetDesignSystem.Colors.surface)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(BudgetDesignSystem.Colors.border, lineWidth: 1)
+                        )
+                )
+            }
+
+            // Error display
+            VStack(alignment: .leading, spacing: BudgetDesignSystem.Spacing.md) {
+                // Error title and code
+                HStack {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(BudgetDesignSystem.Colors.expense)
+
+                    Text(errorTypes[selectedError])
+                        .font(BudgetDesignSystem.Typography.bodyMedium)
+                        .foregroundColor(BudgetDesignSystem.Colors.expense)
+
+                    Spacer()
+
+                    Text("Error: \(String(format: "%03d", selectedError + 500))")
+                        .font(BudgetDesignSystem.Typography.caption1)
+                        .foregroundColor(BudgetDesignSystem.Colors.textSecondary.opacity(0.7))
+                }
+
+                // Error description
+                Text("This is a demonstration of how the app handles errors gracefully. When something goes wrong, you'll see clear error messages with actionable information.")
+                    .font(BudgetDesignSystem.Typography.body)
+                    .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+                    .lineSpacing(2)
+
+                // Suggested actions
+                VStack(alignment: .leading, spacing: BudgetDesignSystem.Spacing.sm) {
+                    Text("Suggested Actions:")
+                        .font(BudgetDesignSystem.Typography.bodyMedium)
+                        .foregroundColor(BudgetDesignSystem.Colors.textPrimary)
+
+                    VStack(alignment: .leading, spacing: BudgetDesignSystem.Spacing.xs) {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.caption)
+                                .foregroundColor(BudgetDesignSystem.Colors.success)
+                            Text("Check your internet connection")
+                                .font(BudgetDesignSystem.Typography.caption1)
+                                .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+                        }
+
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.caption)
+                                .foregroundColor(BudgetDesignSystem.Colors.success)
+                            Text("Restart the app")
+                                .font(BudgetDesignSystem.Typography.caption1)
+                                .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+                        }
+
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.caption)
+                                .foregroundColor(BudgetDesignSystem.Colors.success)
+                            Text("Try again later")
+                                .font(BudgetDesignSystem.Typography.caption1)
+                                .foregroundColor(BudgetDesignSystem.Colors.textSecondary)
+                        }
+                    }
+                }
+                .padding()
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(BudgetDesignSystem.Colors.success.opacity(0.1))
+                )
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(BudgetDesignSystem.Colors.surfaceSecondary)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(BudgetDesignSystem.Colors.expense.opacity(0.3), lineWidth: 1)
+                    )
+            )
+
+            // Action buttons
+            HStack(spacing: BudgetDesignSystem.Spacing.md) {
+                Button("Report Issue") {
+                    // Simulate reporting
+                }
+                .font(BudgetDesignSystem.Typography.bodyMedium)
+                .foregroundColor(BudgetDesignSystem.Colors.primary)
+                .padding(.horizontal, BudgetDesignSystem.Spacing.lg)
+                .padding(.vertical, BudgetDesignSystem.Spacing.md)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(BudgetDesignSystem.Colors.primary.opacity(0.1))
+                )
+
+                Button("Dismiss") {
+                    // Dismiss error
+                }
+                .font(BudgetDesignSystem.Typography.bodyMedium)
+                .foregroundColor(.white)
+                .padding(.horizontal, BudgetDesignSystem.Spacing.lg)
+                .padding(.vertical, BudgetDesignSystem.Spacing.md)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(BudgetDesignSystem.Colors.primary)
+                )
+            }
         }
     }
 }
