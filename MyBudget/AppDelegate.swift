@@ -1,6 +1,6 @@
 import UIKit
 import GoogleMobileAds
-import GoogleSignIn
+// import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -21,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
 
         // Configure Google Sign-In
-        configureGoogleSignIn()
+        // configureGoogleSignIn() // Temporarily disabled for Xcode Cloud
 
         return true
     }
@@ -29,13 +29,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ app: UIApplication,
                     open url: URL,
                     options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance.handle(url)
+        // return GIDSignIn.sharedInstance.handle(url) // Temporarily disabled for Xcode Cloud
+        return false
     }
     
     private func configureGoogleSignIn() {
         // Configure Google Sign-In with provided client ID
-        let clientId = GoogleSignInConfig.clientID
-        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientId)
-        print("✅ Google Sign-In configured with client ID: \(clientId)")
+        // let clientId = GoogleSignInConfig.clientID
+        // GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientId)
+        // print("✅ Google Sign-In configured with client ID: \(clientId)")
+        print("⚠️ Google Sign-In temporarily disabled for Xcode Cloud compatibility")
     }
 }

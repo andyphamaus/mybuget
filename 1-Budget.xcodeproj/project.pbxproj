@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		49C477192E7436660011C93E /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 49C4768A2E7435310011C93E /* GoogleMobileAds */; };
 		49C4771A2E7436660011C93E /* GoogleUserMessagingPlatform in Frameworks */ = {isa = PBXBuildFile; productRef = 49C4768C2E7435320011C93E /* GoogleUserMessagingPlatform */; };
-		49CBD0E62E92A2E700FBBDC8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 49C476912E7438010011C93E /* GoogleSignIn */; };
-/* End PBXBuildFile section */
+	/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		497605C82E7422B9008CF5FB /* 1-Budget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1-Budget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -28,7 +27,6 @@
 		497605C52E7422B9008CF5FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				49CBD0E62E92A2E700FBBDC8 /* GoogleSignIn in Frameworks */,
 				49C4771A2E7436660011C93E /* GoogleUserMessagingPlatform in Frameworks */,
 				49C477192E7436660011C93E /* GoogleMobileAds in Frameworks */,
 			);
@@ -72,7 +70,6 @@
 			packageProductDependencies = (
 				49C4768A2E7435310011C93E /* GoogleMobileAds */,
 				49C4768C2E7435320011C93E /* GoogleUserMessagingPlatform */,
-				49C476912E7438010011C93E /* GoogleSignIn */,
 			);
 			productName = MyBudget;
 			productReference = 497605C82E7422B9008CF5FB /* 1-Budget.app */;
@@ -105,7 +102,6 @@
 			packageReferences = (
 				49C476892E7435300011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 				49C4768B2E7435320011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */,
-				49C476902E7438000011C93E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = 497605C92E7422B9008CF5FB /* Products */;
@@ -384,15 +380,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		49C476902E7438000011C93E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
+	/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		49C4768A2E7435310011C93E /* GoogleMobileAds */ = {
@@ -405,12 +393,7 @@
 			package = 49C4768B2E7435320011C93E /* XCRemoteSwiftPackageReference "swift-package-manager-google-user-messaging-platform" */;
 			productName = GoogleUserMessagingPlatform;
 		};
-		49C476912E7438010011C93E /* GoogleSignIn */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 49C476902E7438000011C93E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignIn;
-		};
-/* End XCSwiftPackageProductDependency section */
+		/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 497605C02E7422B9008CF5FB /* Project object */;
 }

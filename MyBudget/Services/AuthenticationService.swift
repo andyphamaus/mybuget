@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import AuthenticationServices
 import UIKit
-import GoogleSignIn
+// import GoogleSignIn // Temporarily disabled for Xcode Cloud
 
 class AuthenticationService: ObservableObject {
     @Published var authenticationState: AuthenticationState = .unauthenticated
@@ -347,17 +347,23 @@ class AuthenticationService: ObservableObject {
     }
     
     func signInWithGoogle() async {
+        // Temporarily disabled for Xcode Cloud compatibility
+        DispatchQueue.main.async { [weak self] in
+            self?.errorMessage = "Google Sign-In temporarily disabled for Xcode Cloud compatibility"
+        }
+
+        /*
         DispatchQueue.main.async { [weak self] in
             self?.authenticationState = .authenticating
             self?.errorMessage = nil
         }
-        
+
         do {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let rootViewController = windowScene.windows.first?.rootViewController else {
                 throw AuthError.invalidResponse
             }
-            
+
             // Try to restore previous sign-in first to avoid consent screen
             if GIDSignIn.sharedInstance.hasPreviousSignIn() {
                 do {
@@ -369,11 +375,11 @@ class AuthenticationService: ObservableObject {
                     // If restore fails, continue with normal sign-in
                 }
             }
-            
+
             // Normal sign-in if no previous session or restore failed
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
             let googleUser = result.user
-            
+
             // Process the signed-in user
             await processGoogleUser(googleUser)
         } catch {
@@ -386,12 +392,17 @@ class AuthenticationService: ObservableObject {
                 }
             }
         }
+        */
     }
     
-    private func processGoogleUser(_ googleUser: GIDGoogleUser) async {
+    private func processGoogleUser(_ googleUser: Any) async {
+        // Temporarily disabled for Xcode Cloud compatibility
+        print("⚠️ Google Sign-In temporarily disabled for Xcode Cloud compatibility")
+
+        /*
         let email = googleUser.profile?.email ?? ""
         let fullName = googleUser.profile?.name ?? "Google User"
-        
+
         do {
             // Call social login API
             let socialLoginRequest = SocialLoginAPIRequest(
@@ -401,25 +412,25 @@ class AuthenticationService: ObservableObject {
                 countryCode: "AU", // Hard-coded for Australia
                 languageCode: "en" // Hard-coded for English
             )
-            
+
             guard let url = URL(string: "\(baseURL)/Auth/social-login") else {
                 throw AuthError.invalidURL
             }
-            
+
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = try JSONEncoder().encode(socialLoginRequest)
-            
+
             let (data, response) = try await URLSession.shared.data(for: request)
-            
+
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw AuthError.invalidResponse
             }
-            
+
             if httpResponse.statusCode == 200 {
                 let authResponse = try JSONDecoder().decode(AuthAPIResponse.self, from: data)
-                
+
                 if authResponse.success {
                     let user = User(
                         id: authResponse.user?.id.uuidString ?? googleUser.userID ?? UUID().uuidString,
@@ -437,14 +448,14 @@ class AuthenticationService: ObservableObject {
                         isActive: authResponse.user?.isActive ?? true,
                         isDeleted: authResponse.user?.isDeleted ?? false
                     )
-                    
+
                     DispatchQueue.main.async { [weak self] in
                         self?.currentUser = user
                         self?.authToken = authResponse.token
                         self?.authenticationState = .authenticated
                         self?.saveUserToStorage(user)
                         self?.saveTokenToStorage(authResponse.token ?? "")
-                        
+
                         // Sync device token after successful social login
                         _Concurrency.Task {
                             await self?.syncDeviceTokenAfterLogin()
@@ -468,6 +479,7 @@ class AuthenticationService: ObservableObject {
                 self?.errorMessage = "Failed to process Google Sign In: \(error.localizedDescription)"
             }
         }
+        */
     }
     
     

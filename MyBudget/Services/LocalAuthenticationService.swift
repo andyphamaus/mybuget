@@ -2,7 +2,7 @@ import Foundation
 import Combine
 import AuthenticationServices
 import UIKit
-import GoogleSignIn
+// import GoogleSignIn // Temporarily disabled for Xcode Cloud
 import CoreData
 
 @MainActor
@@ -134,17 +134,23 @@ class LocalAuthenticationService: ObservableObject {
     // MARK: - Google Sign In
     
     func signInWithGoogle() async {
+        // Temporarily disabled for Xcode Cloud compatibility
+        DispatchQueue.main.async { [weak self] in
+            self?.errorMessage = "Google Sign-In temporarily disabled for Xcode Cloud compatibility"
+        }
+
+        /*
         DispatchQueue.main.async { [weak self] in
             self?.authenticationState = .authenticating
             self?.errorMessage = nil
         }
-        
+
         do {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let rootViewController = windowScene.windows.first?.rootViewController else {
                 throw AuthError.invalidResponse
             }
-            
+
             // Try to restore previous sign-in first
             if GIDSignIn.sharedInstance.hasPreviousSignIn() {
                 do {
@@ -155,11 +161,11 @@ class LocalAuthenticationService: ObservableObject {
                     // If restore fails, continue with normal sign-in
                 }
             }
-            
+
             // Normal sign-in if no previous session or restore failed
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
             let googleUser = result.user
-            
+
             await processGoogleUser(googleUser)
         } catch {
             DispatchQueue.main.async { [weak self] in
@@ -171,19 +177,25 @@ class LocalAuthenticationService: ObservableObject {
                 }
             }
         }
+        */
     }
     
-    private func processGoogleUser(_ googleUser: GIDGoogleUser) async {
+    private func processGoogleUser(_ googleUser: Any) async {
+        // Temporarily disabled for Xcode Cloud compatibility
+        print("⚠️ Google Sign-In temporarily disabled for Xcode Cloud compatibility")
+
+        /*
         let email = googleUser.profile?.email ?? ""
         let fullName = googleUser.profile?.name ?? "Google User"
         let profileImageURL = googleUser.profile?.imageURL(withDimension: 200)?.absoluteString
-        
+
         // Save user locally to Core Data
         saveUserToCoreData(
             email: email,
             fullName: fullName,
             profileImageURL: profileImageURL
         )
+        */
     }
     
     
@@ -191,15 +203,15 @@ class LocalAuthenticationService: ObservableObject {
     
     func logout() {
         // Sign out from Google if signed in
-        if GIDSignIn.sharedInstance.hasPreviousSignIn() {
-            GIDSignIn.sharedInstance.signOut()
-        }
-        
+        // if GIDSignIn.sharedInstance.hasPreviousSignIn() {
+        //     GIDSignIn.sharedInstance.signOut()
+        // }
+
         // Clear user data
         currentUser = nil
         authenticationState = .unauthenticated
         errorMessage = nil
-        
+
         // Note: We don't delete user data from Core Data for now
         // This allows users to sign back in and retain their data
         // In the future, we might want to add an option to delete all data
