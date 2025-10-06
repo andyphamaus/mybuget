@@ -12,43 +12,14 @@
 		49CBD0E62E92A2E700FBBDC8 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 49C476912E7438010011C93E /* GoogleSignIn */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		497605DC2E7422BA008CF5FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 497605C02E7422B9008CF5FB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 497605C72E7422B9008CF5FB;
-			remoteInfo = MyBudget;
-		};
-		497605E62E7422BA008CF5FB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 497605C02E7422B9008CF5FB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 497605C72E7422B9008CF5FB;
-			remoteInfo = MyBudget;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		497605C82E7422B9008CF5FB /* MyBudget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyBudget.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		497605DB2E7422BA008CF5FB /* MyGardenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyGardenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		497605E52E7422BA008CF5FB /* MyGardenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyGardenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		497605C82E7422B9008CF5FB /* 1-Budget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "1-Budget.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		497605CA2E7422B9008CF5FB /* MyBudget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MyBudget;
-			sourceTree = "<group>";
-		};
-		497605DE2E7422BA008CF5FB /* MyGardenTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MyGardenTests;
-			sourceTree = "<group>";
-		};
-		497605E82E7422BA008CF5FB /* MyGardenUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MyGardenUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -62,16 +33,6 @@
 				49C477192E7436660011C93E /* GoogleMobileAds in Frameworks */,
 			);
 		};
-		497605D82E7422BA008CF5FB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
-		497605E22E7422BA008CF5FB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -79,8 +40,6 @@
 			isa = PBXGroup;
 			children = (
 				497605CA2E7422B9008CF5FB /* MyBudget */,
-				497605DE2E7422BA008CF5FB /* MyGardenTests */,
-				497605E82E7422BA008CF5FB /* MyGardenUITests */,
 				497605C92E7422B9008CF5FB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,9 +47,7 @@
 		497605C92E7422B9008CF5FB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				497605C82E7422B9008CF5FB /* MyBudget.app */,
-				497605DB2E7422BA008CF5FB /* MyGardenTests.xctest */,
-				497605E52E7422BA008CF5FB /* MyGardenUITests.xctest */,
+				497605C82E7422B9008CF5FB /* 1-Budget.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,9 +55,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		497605C72E7422B9008CF5FB /* MyBudget */ = {
+		497605C72E7422B9008CF5FB /* 1-Budget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 497605EF2E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyBudget" */;
+			buildConfigurationList = 497605EF2E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "1-Budget" */;
 			buildPhases = (
 				497605C42E7422B9008CF5FB /* Sources */,
 				497605C52E7422B9008CF5FB /* Frameworks */,
@@ -111,57 +68,15 @@
 			fileSystemSynchronizedGroups = (
 				497605CA2E7422B9008CF5FB /* MyBudget */,
 			);
-			name = MyBudget;
+			name = "1-Budget";
 			packageProductDependencies = (
 				49C4768A2E7435310011C93E /* GoogleMobileAds */,
 				49C4768C2E7435320011C93E /* GoogleUserMessagingPlatform */,
 				49C476912E7438010011C93E /* GoogleSignIn */,
 			);
 			productName = MyBudget;
-			productReference = 497605C82E7422B9008CF5FB /* MyBudget.app */;
+			productReference = 497605C82E7422B9008CF5FB /* 1-Budget.app */;
 			productType = "com.apple.product-type.application";
-		};
-		497605DA2E7422BA008CF5FB /* MyGardenTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 497605F22E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenTests" */;
-			buildPhases = (
-				497605D72E7422BA008CF5FB /* Sources */,
-				497605D82E7422BA008CF5FB /* Frameworks */,
-				497605D92E7422BA008CF5FB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				497605DD2E7422BA008CF5FB /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				497605DE2E7422BA008CF5FB /* MyGardenTests */,
-			);
-			name = MyGardenTests;
-			productName = MyGardenTests;
-			productReference = 497605DB2E7422BA008CF5FB /* MyGardenTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		497605E42E7422BA008CF5FB /* MyGardenUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 497605F52E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenUITests" */;
-			buildPhases = (
-				497605E12E7422BA008CF5FB /* Sources */,
-				497605E22E7422BA008CF5FB /* Frameworks */,
-				497605E32E7422BA008CF5FB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				497605E72E7422BA008CF5FB /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				497605E82E7422BA008CF5FB /* MyGardenUITests */,
-			);
-			name = MyGardenUITests;
-			productName = MyGardenUITests;
-			productReference = 497605E52E7422BA008CF5FB /* MyGardenUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -176,17 +91,9 @@
 					497605C72E7422B9008CF5FB = {
 						CreatedOnToolsVersion = 16.4;
 					};
-					497605DA2E7422BA008CF5FB = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 497605C72E7422B9008CF5FB;
-					};
-					497605E42E7422BA008CF5FB = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 497605C72E7422B9008CF5FB;
-					};
 				};
 			};
-			buildConfigurationList = 497605C32E7422B9008CF5FB /* Build configuration list for PBXProject "MyBudget" */;
+			buildConfigurationList = 497605C32E7422B9008CF5FB /* Build configuration list for PBXProject "1-Budget" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -205,25 +112,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				497605C72E7422B9008CF5FB /* MyBudget */,
-				497605DA2E7422BA008CF5FB /* MyGardenTests */,
-				497605E42E7422BA008CF5FB /* MyGardenUITests */,
+				497605C72E7422B9008CF5FB /* 1-Budget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		497605C62E7422B9008CF5FB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-			);
-		};
-		497605D92E7422BA008CF5FB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-			);
-		};
-		497605E32E7422BA008CF5FB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -236,33 +131,10 @@
 			files = (
 			);
 		};
-		497605D72E7422BA008CF5FB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-			);
-		};
-		497605E12E7422BA008CF5FB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-			);
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		497605DD2E7422BA008CF5FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 497605C72E7422B9008CF5FB /* MyBudget */;
-			targetProxy = 497605DC2E7422BA008CF5FB /* PBXContainerItemProxy */;
-		};
-		497605E72E7422BA008CF5FB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 497605C72E7422B9008CF5FB /* MyBudget */;
-			targetProxy = 497605E62E7422BA008CF5FB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		497605ED2E7422BA008CF5FB /* Debug configuration for PBXProject "MyBudget" */ = {
+		497605ED2E7422BA008CF5FB /* Debug configuration for PBXProject "1-Budget" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -324,7 +196,7 @@
 			};
 			name = Debug;
 		};
-		497605EE2E7422BA008CF5FB /* Release configuration for PBXProject "MyBudget" */ = {
+		497605EE2E7422BA008CF5FB /* Release configuration for PBXProject "1-Budget" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -378,7 +250,7 @@
 			};
 			name = Release;
 		};
-		497605F02E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyBudget" */ = {
+		497605F02E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "1-Budget" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -392,11 +264,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyBudget-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My-Budget";
 				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-7184249493869519~2788569307";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs microphone access to record your meetings for transcription. All audio is processed and stored locally on your device only.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app uses on-device speech recognition to convert your meeting audio into text notes. All processing happens locally - no audio leaves your device.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This app uses advertising ID to provide personalized ads and improve your experience. You can opt out in Settings.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -427,7 +298,7 @@
 			};
 			name = Debug;
 		};
-		497605F12E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyBudget" */ = {
+		497605F12E7422BA008CF5FB /* Release configuration for PBXNativeTarget "1-Budget" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -441,11 +312,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MyBudget-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "My-Budget";
 				INFOPLIST_KEY_GADApplicationIdentifier = "ca-app-pub-7184249493869519~2788569307";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs microphone access to record your meetings for transcription. All audio is processed and stored locally on your device only.";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app uses on-device speech recognition to convert your meeting audio into text notes. All processing happens locally - no audio leaves your device.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This app uses advertising ID to provide personalized ads and improve your experience. You can opt out in Settings.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -472,96 +342,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 2.5;
-			};
-			name = Release;
-		};
-		497605F32E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenTests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 35C6TPQNMQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBudget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBudget";
-				XROS_DEPLOYMENT_TARGET = 2.5;
-			};
-			name = Debug;
-		};
-		497605F42E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenTests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 35C6TPQNMQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyBudget.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MyBudget";
-				XROS_DEPLOYMENT_TARGET = 2.5;
-			};
-			name = Release;
-		};
-		497605F62E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenUITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 35C6TPQNMQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = MyBudget;
-				XROS_DEPLOYMENT_TARGET = 2.5;
-			};
-			name = Debug;
-		};
-		497605F72E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenUITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 35C6TPQNMQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.andycompany.mybudgetUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = MyBudget;
 				XROS_DEPLOYMENT_TARGET = 2.5;
 			};
 			name = Release;
@@ -569,35 +349,19 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		497605C32E7422B9008CF5FB /* Build configuration list for PBXProject "MyBudget" */ = {
+		497605C32E7422B9008CF5FB /* Build configuration list for PBXProject "1-Budget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				497605ED2E7422BA008CF5FB /* Debug configuration for PBXProject "MyBudget" */,
-				497605EE2E7422BA008CF5FB /* Release configuration for PBXProject "MyBudget" */,
+				497605ED2E7422BA008CF5FB /* Debug configuration for PBXProject "1-Budget" */,
+				497605EE2E7422BA008CF5FB /* Release configuration for PBXProject "1-Budget" */,
 			);
 			defaultConfigurationName = Release;
 		};
-		497605EF2E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyBudget" */ = {
+		497605EF2E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "1-Budget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				497605F02E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyBudget" */,
-				497605F12E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyBudget" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		497605F22E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				497605F32E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenTests" */,
-				497605F42E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenTests" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		497605F52E7422BA008CF5FB /* Build configuration list for PBXNativeTarget "MyGardenUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				497605F62E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "MyGardenUITests" */,
-				497605F72E7422BA008CF5FB /* Release configuration for PBXNativeTarget "MyGardenUITests" */,
+				497605F02E7422BA008CF5FB /* Debug configuration for PBXNativeTarget "1-Budget" */,
+				497605F12E7422BA008CF5FB /* Release configuration for PBXNativeTarget "1-Budget" */,
 			);
 			defaultConfigurationName = Release;
 		};

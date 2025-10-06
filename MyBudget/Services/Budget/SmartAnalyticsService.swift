@@ -189,7 +189,7 @@ class SmartAnalyticsService: ObservableObject {
             }
         }
     }
-    private var transactionHashCache: [String: Int] = [:] // categoryId -> transaction hash {
+    private var transactionHashCache: [String: Int] = [:] {
         didSet {
             if transactionHashCache.count > maxCacheSize {
                 let keysToRemove = Array(transactionHashCache.keys.prefix(transactionHashCache.count - maxCacheSize))

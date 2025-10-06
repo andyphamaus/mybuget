@@ -331,9 +331,13 @@ struct CurrencyChip: View {
     let currency: String
     let isSelected: Bool
     let action: () -> Void
-    
+    private let hapticManager = HapticManager()
+
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            hapticManager.selection()
+            action()
+        }) {
             Text(currency)
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundColor(isSelected ? .white : .primary)
@@ -353,9 +357,13 @@ struct IconChip: View {
     let systemName: String
     let isSelected: Bool
     let action: () -> Void
-    
+    private let hapticManager = HapticManager()
+
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            hapticManager.selection()
+            action()
+        }) {
             Image(systemName: systemName)
                 .font(.system(size: 20))
                 .foregroundColor(isSelected ? .white : .primary)
@@ -391,9 +399,13 @@ struct PeriodOption: View {
     let period: String
     let isSelected: Bool
     let action: () -> Void
-    
+    private let hapticManager = HapticManager()
+
     var body: some View {
-        Button(action: action) {
+        Button(action: {
+            hapticManager.selection()
+            action()
+        }) {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 24))
@@ -488,24 +500,28 @@ struct CategoryRow: View {
 
 struct MockBudgetPlanner: View {
     @State private var amount: Double = 500
-    
+    private let hapticManager = HapticManager()
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
                 Text("Monthly Budget")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.secondary)
-                
+
                 Spacer()
-                
+
                 Text("$\(Int(amount))")
                     .font(.system(size: 18, weight: .bold, design: .monospaced))
                     .foregroundColor(.green)
             }
-            
+
             Slider(value: $amount, in: 0...2000, step: 100)
                 .accentColor(.green)
-            
+                .onTapGesture {
+                    hapticManager.sliderChange()
+                }
+
             // Mini pie chart
             MiniPieChart(value: amount / 2000)
         }
@@ -543,20 +559,24 @@ struct MiniPieChart: View {
 struct MockTransactionEntry: View {
     @State private var amount = ""
     @State private var showCamera = false
-    
+    private let hapticManager = HapticManager()
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
                 Image(systemName: "dollarsign.circle.fill")
                     .font(.system(size: 24))
                     .foregroundColor(.green)
-                
+
                 TextField("Enter amount", text: $amount)
                     .textFieldStyle(.roundedBorder)
                     .keyboardType(.decimalPad)
             }
-            
-            Button(action: { showCamera.toggle() }) {
+
+            Button(action: {
+                hapticManager.buttonTap()
+                showCamera.toggle()
+            }) {
                 HStack {
                     Image(systemName: "camera.fill")
                     Text("Scan Receipt")

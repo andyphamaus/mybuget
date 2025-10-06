@@ -7,7 +7,7 @@ import CoreData
 class BudgetViewModel: ObservableObject {
     // MARK: - Properties
     private let authService: LocalAuthenticationService
-    private let userId: String
+    private var userId: String
 
     // MARK: - Published Properties
 
@@ -74,11 +74,14 @@ class BudgetViewModel: ObservableObject {
 
         // If authService is provided, use it; otherwise create a temporary one
         self.authService = authService ?? LocalAuthenticationService()
-        self.userId = getUserIdFromAuth() // Will be updated dynamically
+        self.userId = "" // Temporary value, will be updated dynamically
         self.budgetService = budgetService ?? BudgetService()
         self.categoryService = categoryService ?? CategoryService()
         self.transactionService = transactionService ?? TransactionService()
         self.planningService = planningService ?? PlanningService()
+
+        // Set initial userId
+        self.userId = getUserIdFromAuth()
 
         setupBindings()
         setupUserIdObserver()
@@ -1044,7 +1047,7 @@ class BudgetViewModel: ObservableObject {
         // Listen for changes to currentUser
         authService.$currentUser
             .compactMap { user in
-                user?.id.uuidString
+                user?.id?.uuidString
             }
             .removeDuplicates()
             .sink { [weak self] newUserId in
